@@ -6,7 +6,7 @@ import {
   IconBrandLinkedin,
   IconMail,
 } from "@tabler/icons-react";
-import { SECTION_IDS } from "@/data/constellations";
+import { CONTACT, SECTION_IDS } from "@/data/constellations";
 
 interface Props {
   section: number;
@@ -215,17 +215,9 @@ export default function UIOverlay({
         }}
       >
         {[
-          {
-            href: "https://github.com/aranya",
-            label: "GitHub",
-            Icon: IconBrandGithub,
-          },
-          {
-            href: "https://linkedin.com/in/aranya",
-            label: "LinkedIn",
-            Icon: IconBrandLinkedin,
-          },
-          { href: "mailto:aranya@example.com", label: "Email", Icon: IconMail },
+          { href: CONTACT.github, label: "GitHub", Icon: IconBrandGithub },
+          { href: CONTACT.linkedin, label: "LinkedIn", Icon: IconBrandLinkedin },
+          { href: `mailto:${CONTACT.email}`, label: "Email", Icon: IconMail },
         ].map(({ href, label, Icon }) => (
           <a
             key={label}

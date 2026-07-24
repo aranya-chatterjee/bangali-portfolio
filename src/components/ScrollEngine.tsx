@@ -22,7 +22,9 @@ const MAX_P = SECTION_COUNT - 1;
  */
 export default function ScrollEngine({ reduced, onProgress, registerGoTo }: Props) {
   const cb = useRef(onProgress);
-  cb.current = onProgress;
+  useEffect(() => {
+    cb.current = onProgress;
+  }, [onProgress]);
 
   useEffect(() => {
     gsap.registerPlugin(Observer);

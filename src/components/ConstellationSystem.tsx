@@ -153,25 +153,25 @@ const ConstellationGroup = forwardRef<GroupApi, GroupProps>(
         const len = new THREE.Vector3(...positions[a]).distanceTo(
           new THREE.Vector3(...positions[b])
         );
+        // lines start undrawn; the orchestrator traces them in on arrival
         const m = new LineMaterial({
           color: new THREE.Color(palette.edgeColor).getHex(),
           linewidth: 1.6,
           transparent: true,
-          opacity: shownRef.current ? EDGE_BASE_OPACITY : 0,
+          opacity: 0,
           dashed: true,
           dashSize: len,
           gapSize: len,
           depthWrite: false,
         });
         m.blending = THREE.AdditiveBlending;
-        m.dashOffset = shownRef.current ? 0 : len;
+        m.dashOffset = len;
         m.resolution.set(gl.domElement.width, gl.domElement.height);
         const line = new Line2(g, m);
         line.computeLineDistances();
         line.userData.len = len;
         return line;
       });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [edges, positions, palette.edgeColor, gl]);
 
     useEffect(() => {
@@ -369,6 +369,22 @@ const ConstellationGroup = forwardRef<GroupApi, GroupProps>(
       onHover(null);
     };
 
+    // navigate via a synthetic anchor rather than window.open: popup blockers
+    // let this through, and mailto:/tel: hand off to the OS handler
+    const open = (node: StarNode) => {
+      if (!node.href) return;
+      const external = /^https?:/.test(node.href);
+      const a = document.createElement("a");
+      a.href = node.href;
+      if (external || node.href.endsWith(".pdf")) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
     return (
       <group
         ref={(el) => {
@@ -422,9 +438,16 @@ const ConstellationGroup = forwardRef<GroupApi, GroupProps>(
               }}
               onClick={(e: ThreeEvent<MouseEvent>) => {
                 e.stopPropagation();
-                if (!isMobile) return;
-                if (hoverIdx.current === i) leave(i);
-                else enter(i, node);
+                if (!shownRef.current) return;
+                if (!isMobile) {
+                  open(node);
+                  return;
+                }
+                // mobile: first tap reveals the star, second tap opens it
+                if (hoverIdx.current === i) {
+                  if (node.href) open(node);
+                  else leave(i);
+                } else enter(i, node);
               }}
             >
               <sphereGeometry args={[node.r * 3, 8, 8]} />
@@ -464,9 +487,13 @@ export default function ConstellationSystem({
   const apis = useRef<(GroupApi | null)[]>([]);
   const displayed = useRef<number | null>(null);
   const sectionRef = useRef(section);
-  sectionRef.current = section;
   const departTl = useRef<gsap.core.Timeline | null>(null);
   const arriveTl = useRef<gsap.core.Timeline | null>(null);
+
+  // the gsap ticker below reads the latest section without re-subscribing
+  useEffect(() => {
+    sectionRef.current = section;
+  }, [section]);
 
   // only the current section's constellation and the next one (the approach
   // target ahead) exist in the sky; everything further stays hidden

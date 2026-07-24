@@ -84,6 +84,20 @@ export default function StarTooltip({ hover, isMobile }: Props) {
           </span>
         ))}
       </div>
+      {node.node.href && (
+        <div
+          style={{
+            fontFamily: "var(--font-space-mono)",
+            fontSize: "9px",
+            letterSpacing: "1.5px",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.28)",
+            marginTop: "10px",
+          }}
+        >
+          {isMobile ? "tap again to open" : "click to open"} ↗
+        </div>
+      )}
     </div>
   );
 
