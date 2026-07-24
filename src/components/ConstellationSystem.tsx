@@ -496,14 +496,16 @@ export default function ConstellationSystem({
   }, [section]);
 
   // only the current section's constellation and the next one (the approach
-  // target ahead) exist in the sky; everything further stays hidden
+  // target ahead) exist in the sky; everything further stays hidden. Home is
+  // deliberately empty — nothing ahead of it until the first gesture.
   const firstPresence = useRef(true);
   useEffect(() => {
     const instant = reduced || firstPresence.current;
     firstPresence.current = false;
     SECTIONS.forEach((s, i) => {
       if (!s.constellation) return;
-      apis.current[i]?.setPresence(i === section || i === section + 1, instant);
+      const present = i === section || (section > 0 && i === section + 1);
+      apis.current[i]?.setPresence(present, instant);
     });
   }, [section, reduced]);
 
