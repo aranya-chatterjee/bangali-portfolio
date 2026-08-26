@@ -1,4 +1,4 @@
-# Aranya Chatterjee — Constellation Universe Portfolio
+# Aranya Chatterjee — Constellation Universe Portfolio website
 
 A gesture-driven 3D portfolio for an AI/ML engineer. The whole site is one
 continuous camera flight through a starfield: five sections (home, about,
