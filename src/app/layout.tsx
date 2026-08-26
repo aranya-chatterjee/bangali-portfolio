@@ -24,7 +24,7 @@ const siteUrl =
 
 const title = "Aranya Chatterjee — AI / ML Engineer";
 const description =
-  "Portfolio of Aranya Chatterjee — computer science undergrad at MITS Gwalior, machine learning intern, and published researcher working on RAG systems, computer vision, and LLMs.";
+  "Portfolio of Aranya Chatterjee — computer science undergrad at MITS Gwalior, machine learning intern, and published researcher working on multi-agent AI systems, RAG, computer vision, and LLMs.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     "Aranya Chatterjee",
     "AI engineer",
     "machine learning",
+    "agentic AI",
+    "Google ADK",
+    "LangGraph",
     "RAG",
     "computer vision",
     "LLM",
@@ -93,6 +96,7 @@ const jsonLd = {
   },
   knowsAbout: [
     "Machine Learning",
+    "Multi-Agent Systems",
     "Retrieval-Augmented Generation",
     "Computer Vision",
     "Large Language Models",
