@@ -166,7 +166,7 @@ export const SECTIONS: Section[] = [
           name: "Agentic AI Orchestration Engine",
           desc: "Multi-agent GitHub triage built twice — once on Google ADK, once as an explicit LangGraph state machine with human-in-the-loop escalation and Postgres checkpointing",
           tags: ["Google ADK", "LangGraph", "DSPy/GEPA"],
-          href: "https://github.com/aranya-chatterjee/adk-github-agent",
+          href: "https://github.com/aranya-chatterjee/langgraph-adk-version",
         },
         {
           id: "p2", ox: 45, oy: -80, r: 2.5,
@@ -213,15 +213,24 @@ export const SECTIONS: Section[] = [
           desc: "Team-led build at Code-N-Compete, IIT Kanpur — 25% faster integration through parallel workflows",
           tags: ["IIT Kanpur", "Team lead"],
         },
+        {
+          id: "p8", ox: -130, oy: -40, r: 2.4,
+          label: "live · client work",
+          name: "Toku's Ramyum Bar",
+          desc: "Live website for a ramen bar in Gwalior with automatic table bookings (per-slot seat capacity, instant confirmation), QR table ordering, a PIN-protected staff dashboard with GST billing, and a moderated rating wall",
+          tags: ["Cloudflare Workers", "D1", "JavaScript"],
+          href: "https://tokusramyumbar.com",
+        },
       ],
       edges: [
         [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [6, 0], [6, 2], [6, 4],
+        [7, 0], [7, 5],
       ],
     },
     text: {
       label: "// projects",
       title: "Things I've\nshipped.",
-      body: "Agent orchestration engines, retrieval pipelines, vision systems, and ML tooling — plus published research. Each one a real problem with a real solution.",
+      body: "Agent orchestration engines, retrieval pipelines, vision systems, and a live booking and ordering system running a real restaurant — plus published research. Each one a real problem with a real solution.",
     },
   },
   {
@@ -317,16 +326,23 @@ export const SECTIONS: Section[] = [
           desc: "Shipping interfaces with Streamlit, versioning in Git, prototyping in Jupyter",
           tags: ["Streamlit", "Git", "Jupyter"],
         },
+        {
+          id: "sk12", ox: 15, oy: 45, r: 1.9,
+          label: "web + edge",
+          name: "JavaScript + Cloudflare",
+          desc: "Full-stack web apps on Cloudflare Workers with D1 (SQL), deployed by Wrangler and GitHub auto-deploy",
+          tags: ["Workers", "D1", "Wrangler"],
+        },
       ],
       edges: [
         [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 0],
-        [0, 9], [9, 10], [10, 1], [9, 8], [10, 3],
+        [0, 9], [9, 10], [10, 1], [9, 8], [10, 3], [11, 6], [11, 4],
       ],
     },
     text: {
       label: "// skills",
       title: "The stack\nI live in.",
-      body: "From multi-agent orchestration and transformer fine-tuning to retrieval pipelines, detection models, and the containers that ship them.",
+      body: "From multi-agent orchestration and transformer fine-tuning to retrieval pipelines, detection models, and the containers and edge workers that ship them.",
     },
   },
   {

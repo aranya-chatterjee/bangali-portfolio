@@ -48,6 +48,8 @@ export const metadata: Metadata = {
     "LLM",
     "PyTorch",
     "LangChain",
+    "Cloudflare Workers",
+    "full-stack",
     "portfolio",
     "MITS Gwalior",
   ],
@@ -100,6 +102,7 @@ const jsonLd = {
     "Retrieval-Augmented Generation",
     "Computer Vision",
     "Large Language Models",
+    "Web Development",
   ],
   sameAs: [
     "https://github.com/aranya-chatterjee",
